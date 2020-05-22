@@ -1,0 +1,63 @@
+:root {
+    --title-font: 'Ubuntu', 'NanumBarunRoboto', sans-serif;
+    --content-font: 'Oxygen', 'NanumBarunRoboto', sans-serif;
+    --code-font: 'Iosevka', monospace;
+
+    --background-lighten-1: #ffffff;
+    --background:           #f4f4f4;
+    --background-darken-1:  #eaeaea;
+
+    --highlight:           #47759f;
+    --highlight-lighten-1: #5a8ab5;
+    --highlight-darken-1:  #3c6387;
+    --highlight-text:      #ffffff;
+
+    --text:           #202020;
+    --link:           #47759f;
+    --status-error:   #ec5252;
+    --status-active:  #27ae60;
+    --status-syncing: #6c4fe3;
+}
+
+html {
+    background: var(--background);
+    font-family: var(--content-font);
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: var(--link);
+}
+
+button {
+    cursor: pointer;
+    background: var(--highlight);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    color: var(--highlight-text);
+    font-size: .9rem;
+    font-family: var(--content-font);
+    padding: 10px 20px;
+    transition: background-color .4s ease;
+
+    &:hover {
+        background: var(--highlight-lighten-1);
+    }
+
+    &:active {
+        background: var(--highlight-darken-1);
+    }
+}
+
+@custom-media --over-xs ( width >= 768px  );
+@custom-media --over-md ( width >= 992px  );
+@custom-media --over-lg ( width >= 1200px );
+
+@custom-media --under-xs ( width < 768px  );
+@custom-media --under-md ( width < 992px  );
+@custom-media --under-lg ( width < 1200px );

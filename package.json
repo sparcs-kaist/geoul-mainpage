@@ -1,0 +1,42 @@
+{
+  "name": "geoul-front",
+  "version": "1.0.0",
+  "description": "Frontpage of geoul (ftp.kaist.ac.kr)",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "generate": "nuxt generate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sparcs-kaist/geoul-front.git"
+  },
+  "keywords": [
+    "geoul",
+    "mirror",
+    "kaist"
+  ],
+  "author": "SPARCS",
+  "license": "MIT",
+  "browserslist": [
+    "last 2 version",
+    "android >= 4.4",
+    "IE >= 10"
+  ],
+  "bugs": {
+    "url": "https://github.com/sparcs-kaist/geoul-front/issues"
+  },
+  "homepage": "https://github.com/sparcs-kaist/geoul-front#readme",
+  "dependencies": {
+    "@nuxtjs/axios": "^5.9.5",
+    "@nuxtjs/svg": "^0.1.6",
+    "date-fns": "^2.11.0",
+    "dotenv": "^8.2.0",
+    "nuxt": "^2.11.0",
+    "nuxt-i18n": "^6.6.0"
+  },
+  "devDependencies": {
+    "postcss-nested": "^4.2.1",
+    "postcss-preset-env": "^6.7.0"
+  }
+}
