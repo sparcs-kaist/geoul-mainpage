@@ -39,6 +39,7 @@
             display: flex;
             flex-direction: column;
             margin-top: 10px;
+            max-width: 300px;
         }
 
         &__row {
@@ -47,7 +48,10 @@
 
         &__category {
             flex: 1;
+            width: 0;
             text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
             background: var(--background);
             padding: 10px;
         }

@@ -25,11 +25,9 @@
         abstract-content:
             - 카이스트 미러에 오신 것을 환영합니다!
             - >
-                카이스트 미러에서는 Ubuntu, *BSD, Mozilla, Apache 등 오픈 소스 소프트웨어 미러링
-                및 여러 파일과 소프트웨어의 미러링 서비스를 제공합니다.
-
-            - >
-                FTP, HTTP, rsync로 접근하실 수 있습니다.
+                카이스트 미러에서는 Debian, *BSD, Mozilla, Apache 등 오픈 소스 소프트웨어 미러링
+                및 여러 파일과 소프트웨어의 미러링 서비스를 제공하며, FTP, HTTP, rsync로 접근하실 수 있습니다.
+                시스템의 운영 체제는 Ubuntu GNU/Linux이며, lighttpd, rsync, vsftpd 등의 자유 소프트웨어를 사용하고 있습니다.
 
         abstract-content-contact: >
             문제가 발생하였거나 제안 사항이 있으면 {email}로 연락해 주십시오.
@@ -57,6 +55,8 @@
                 KAIST Mirror is an mirroring service,
                 which mirrors Debian, *BSD, Mozilla, Apache and other open source softwares.
                 You can access it by ftp, http, https and rsync.
+                We run our services using robust, free or open source software,
+                including but not limited to lighttpd, rsync, and vsftpd on the Ubuntu GNU/Linux operating system.
 
         abstract-content-contact: >
             If you have any problems or suggestions, please contact us by {email}.

@@ -16,6 +16,8 @@
                 <TheContact />
             </aside>
         </main>
+
+        <TheFooter />
     </div>
 </template>
 
@@ -88,6 +90,7 @@
     import TheContact from "@/components/TheContact";
     import TheDescriptions from "@/components/TheDescriptions";
     import TheFeeds from "@/components/TheFeeds";
+    import TheFooter from "@/components/TheFooter";
     import TheLinks from "@/components/TheLinks";
     import TheOptOut from "@/components/TheOptOut";
     import ThePackages from "@/components/ThePackages";
@@ -110,6 +113,7 @@
             TheContact,
             TheDescriptions,
             TheFeeds,
+            TheFooter,
             TheLinks,
             TheOptOut,
             ThePackages,

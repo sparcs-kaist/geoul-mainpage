@@ -6,6 +6,7 @@
     --background-lighten-1: #ffffff;
     --background:           #f4f4f4;
     --background-darken-1:  #eaeaea;
+    --background-darken-2:  #8a8a8a;
 
     --highlight:           #47759f;
     --highlight-lighten-1: #5a8ab5;
@@ -51,6 +52,16 @@ button {
 
     &:active {
         background: var(--highlight-darken-1);
+    }
+}
+
+.Fade {
+    &-enter, &-leave-to {
+        opacity: 0;
+    }
+
+    &-enter-active, &-leave-active {
+        transition: opacity .4s ease;
     }
 }
 
