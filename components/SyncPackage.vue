@@ -3,10 +3,8 @@
         <a :href="packageLink" class="SyncPackage__row">
             <component class="SyncPackage__icon" :is="packageStatus" />
             <span class="SyncPackage__name"> {{ packageName }} </span>
-            <div class="SyncPackage__date">
-                <span class="SyncPackage__latest"> {{ latestUpdate }} </span>
-                <span class="SyncPackage__interval"> {{ interval }} </span>
-            </div>
+
+            <SyncPackageDialog class="SyncPackage__dialog" :package="package" />
         </a>
     </div>
 </template>
@@ -18,6 +16,7 @@
         flex: 0 0 50%;
         padding: 0 5px;
         box-sizing: border-box;
+        position: relative;
 
         &__row {
             display: flex;
@@ -43,6 +42,17 @@
             font-size: 1.3rem;
             font-weight: 300;
         }
+
+        &__dialog {
+            visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 20vw;
+        }
+
+        &:hover &__dialog {
+            visibility: visible;
+        }
     }
 
     @media (--under-xs) {
@@ -59,6 +69,7 @@
     import IconFailed from "@/assets/images/IconFailed.svg?inline";
     import IconSyncing from "@/assets/images/IconSyncing.svg?inline";
     import IconUnknown from "@/assets/images/IconUnknown.svg?inline";
+    import SyncPackageDialog from "@/components/SyncPackageDialog";
 
     export default {
         name: 'SyncPackage',
@@ -98,14 +109,6 @@
                     return 'IconActive';
 
                 return 'IconUnknown';
-            },
-
-            latestUpdate() {
-                const date = new Date(this.package.timestamp);
-            },
-
-            interval() {
-
             }
         },
 
@@ -113,7 +116,8 @@
             IconActive,
             IconFailed,
             IconSyncing,
-            IconUnknown
+            IconUnknown,
+            SyncPackageDialog
         }
     };
 </script>

@@ -1,7 +1,7 @@
 :root {
     --title-font: 'Ubuntu', 'NanumBarunRoboto', sans-serif;
     --content-font: 'Oxygen', 'NanumBarunRoboto', sans-serif;
-    --code-font: 'Iosevka', monospace;
+    --code-font: 'Iosevka', 'NanumBarunRoboto', monospace;
 
     --background-lighten-1: #ffffff;
     --background:           #f4f4f4;
