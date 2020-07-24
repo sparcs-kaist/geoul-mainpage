@@ -79,7 +79,6 @@
 
         methods: {
             changeLocale() {
-                console.log(this.$root);
                 this.$root.$i18n.setLocale(this.alternativeLang);
             }
         },
