@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sparcs-kaist/geoul-front.git"
+    "url": "git+https://github.com/sparcs-kaist/geoul-mainpage.git"
   },
   "keywords": [
     "geoul",
@@ -26,9 +26,9 @@
     "IE >= 10"
   ],
   "bugs": {
-    "url": "https://github.com/sparcs-kaist/geoul-front/issues"
+    "url": "https://github.com/sparcs-kaist/geoul-mainpage/issues"
   },
-  "homepage": "https://github.com/sparcs-kaist/geoul-front#readme",
+  "homepage": "https://github.com/sparcs-kaist/geoul-mainpage#readme",
   "dependencies": {
     "@nuxtjs/axios": "^5.9.5",
     "@nuxtjs/proxy": "^2.0.1",
