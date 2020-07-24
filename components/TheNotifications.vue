@@ -11,8 +11,6 @@
             >
                 Tweets by kaist_ftp
             </a>
-
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
     </section>
 </template>
@@ -36,6 +34,14 @@
 
 <script>
     export default {
-        name: 'TheNotifications'
+        name: 'TheNotifications',
+
+        mounted() {
+            const twitterScript = document.createElement('script');
+            twitterScript.src = "https://platform.twitter.com/widgets.js";
+            twitterScript.charset = "utf-8";
+            twitterScript.async = true;
+            document.body.appendChild(twitterScript);
+        }
     };
 </script>
