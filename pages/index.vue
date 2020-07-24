@@ -10,6 +10,7 @@
 
             <aside class="Index__column Index__column--side">
                 <TheLinks />
+                <TheNotifications />
                 <TheSpeedTest />
                 <TheFeeds />
                 <TheSpec />
@@ -92,6 +93,7 @@
     import TheFeeds from "@/components/TheFeeds";
     import TheFooter from "@/components/TheFooter";
     import TheLinks from "@/components/TheLinks";
+    import TheNotifications from "@/components/TheNotifications";
     import TheOptOut from "@/components/TheOptOut";
     import ThePackages from "@/components/ThePackages";
     import TheSpec from "@/components/TheSpec";
@@ -115,6 +117,7 @@
             TheFeeds,
             TheFooter,
             TheLinks,
+            TheNotifications,
             TheOptOut,
             ThePackages,
             TheSpec,
