@@ -155,6 +155,7 @@
         methods: {
             startTest() {
                 this.finished = false;
+                this.error = false;
                 this.progress = 0;
                 this.runningTest = true;
                 const total = 30 * 1024 * 1024;
