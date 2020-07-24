@@ -53,7 +53,7 @@ module.exports = {
             });
         },
 
-        publicPath: '/.self/'
+        publicPath: '/.self/static/'
     },
 
     renderer: {
