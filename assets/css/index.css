@@ -1,6 +1,6 @@
 :root {
     --title-font: 'Ubuntu', 'NanumBarunRoboto', sans-serif;
-    --content-font: 'Oxygen', 'NanumBarunRoboto', sans-serif;
+    --content-font: 'NanumBarunRoboto', sans-serif;
     --code-font: 'Iosevka', 'NanumBarunRoboto', monospace;
 
     --background-lighten-1: #ffffff;
@@ -10,6 +10,7 @@
 
     --highlight:           #47759f;
     --highlight-lighten-1: #5a8ab5;
+    --highlight-lighten-2: #dce6ef;
     --highlight-darken-1:  #3c6387;
     --highlight-text:      #ffffff;
 
@@ -20,7 +21,12 @@
     --status-syncing: #6c4fe3;
 }
 
+::selection {
+    background: var(--highlight-lighten-2);
+}
+
 html {
+    color: var(--text);
     background: var(--background);
     font-family: var(--content-font);
 }
@@ -72,3 +78,13 @@ button {
 @custom-media --under-xs ( width < 768px  );
 @custom-media --under-md ( width < 992px  );
 @custom-media --under-lg ( width < 1200px );
+
+@media(prefers-color-scheme: dark) {
+    :root {
+        --text: #ffffff;
+        --background: #101010;
+        --background-lighten-1: #202020;
+        --background-darken-1: #303030;
+        --background-darken-2: #404040;
+    }
+}

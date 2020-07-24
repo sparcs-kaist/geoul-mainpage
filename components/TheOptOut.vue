@@ -36,7 +36,7 @@
         }
 
         &__link {
-            color: var(--background);
+            color: var(--highlight-text);
         }
     }
 </style>

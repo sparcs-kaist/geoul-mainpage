@@ -1,7 +1,7 @@
 <template>
     <div class="Topbar">
         <div class="Topbar__branding">
-            <GeoulLogo />
+            <GeoulLogo class="Topbar__logo" />
         </div>
 
         <div class="Topbar__links">
@@ -29,6 +29,10 @@
 
         &__branding {
             padding: 15px 0;
+        }
+
+        &__logo {
+            fill: var(--text);
         }
 
         &__links {
