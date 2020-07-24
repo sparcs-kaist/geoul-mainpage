@@ -38,6 +38,7 @@
 
         &__subtitle {
             font-family: var(--title-font);
+            font-weight: 700;
             margin-top: 2rem;
             margin-bottom: 1rem;
         }

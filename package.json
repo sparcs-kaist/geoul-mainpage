@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "generate": "nuxt generate"
+    "build": "cross-env NODE_ENV=production nuxt build",
+    "export": "cross-env NODE_ENV=production nuxt export"
   },
   "repository": {
     "type": "git",
@@ -29,14 +30,16 @@
   "homepage": "https://github.com/sparcs-kaist/geoul-front#readme",
   "dependencies": {
     "@nuxtjs/axios": "^5.9.5",
+    "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/svg": "^0.1.6",
     "date-fns": "^2.14.0",
     "dotenv": "^8.2.0",
     "iso8601-duration": "^1.2.0",
-    "nuxt": "^2.11.0",
+    "nuxt": "^2.13.3",
     "nuxt-i18n": "^6.6.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "postcss-nested": "^4.2.1",
     "postcss-preset-env": "^6.7.0"
   }

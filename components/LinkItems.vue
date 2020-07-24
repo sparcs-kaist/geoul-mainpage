@@ -19,6 +19,7 @@
         &__title {
             font-family: var(--title-font);
             font-size: 1.35rem;
+            font-weight: 700;
             margin-top: 0;
             margin-bottom: .5rem;
         }

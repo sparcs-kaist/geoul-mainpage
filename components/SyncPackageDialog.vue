@@ -105,6 +105,7 @@
         &__title {
             font-family: var(--title-font);
             font-size: 1.5rem;
+            font-weight: 700;
             margin: 0;
             white-space: nowrap;
             overflow: hidden;
@@ -276,7 +277,7 @@
             },
 
             diskUsage() {
-                return `http://ftp.kaist.ac.kr/geoul/pkgs/${this.package.id}/du.png`;
+                return `/geoul/pkgs/${this.package.id}/du.png`;
             }
         },
 

@@ -4,7 +4,7 @@
             {{ $t('optout-description') }}
         </div>
 
-        <a class="OptOut__link" href="/legacy.html">
+        <a class="OptOut__link" href="/.self/legacy/">
             {{ $t('optout') }}
         </a>
     </section>

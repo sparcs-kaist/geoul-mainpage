@@ -102,6 +102,7 @@
     .Packages {
         &__category-title {
             font-family: var(--title-font);
+            font-weight: 700;
             margin-left: 10px;
         }
 

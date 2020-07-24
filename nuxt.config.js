@@ -19,7 +19,8 @@ module.exports = {
 
         link: [
             { rel: 'icon', href: '/public/favicon.ico' },
-            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Oxygen:300,400,700&display=swap' }
+            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Ubuntu:700&display=swap' },
+
         ]
     },
 
@@ -50,7 +51,9 @@ module.exports = {
                     name: 'obj/[name].[ext]'
                 }
             });
-        }
+        },
+
+        publicPath: '/.self/'
     },
 
     renderer: {
@@ -62,6 +65,7 @@ module.exports = {
     },
 
     modules: [
+        '@nuxtjs/proxy',
         '@nuxtjs/axios',
         '@nuxtjs/svg',
         [
@@ -78,6 +82,18 @@ module.exports = {
     ],
 
     axios: {
-         baseURL: process.env.GEOUL_URL
-    }
+        proxy: true
+    },
+
+    proxy: [
+        'http://ftp.kaist.ac.kr/geoul'
+    ],
+
+    export: {
+        crawler: false,
+        subFolders: false,
+        fallback: false
+    },
+
+    target: 'static'
 };

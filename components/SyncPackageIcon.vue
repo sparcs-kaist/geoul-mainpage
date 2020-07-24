@@ -1,12 +1,12 @@
 <template>
-    <component class="SyncPackage__icon" :is="packageStatus" />
+    <img class="SyncPackage__icon" :src="packageStatus" />
 </template>
 
 <script>
-    import IconActive from "@/assets/images/IconActive.svg?inline";
-    import IconFailed from "@/assets/images/IconFailed.svg?inline";
-    import IconSyncing from "@/assets/images/IconSyncing.svg?inline";
-    import IconUnknown from "@/assets/images/IconUnknown.svg?inline";
+    import IconActive from "@/assets/images/IconActive.svg";
+    import IconFailed from "@/assets/images/IconFailed.svg";
+    import IconSyncing from "@/assets/images/IconSyncing.svg";
+    import IconUnknown from "@/assets/images/IconUnknown.svg";
 
     export default {
         name: 'SyncPackageIcon',
@@ -22,26 +22,19 @@
                 const status = this.package.status;
 
                 if(!status)
-                    return 'IconUnknown';
+                    return IconUnknown;
 
                 if(status.updating)
-                    return 'IconSyncing';
+                    return IconSyncing;
 
                 if(status.failed)
-                    return 'IconFailed';
+                    return IconFailed;
 
                 if(status.updated)
-                    return 'IconActive';
+                    return IconActive;
 
-                return 'IconUnknown';
+                return IconUnknown;
             }
-        },
-
-        components: {
-            IconActive,
-            IconFailed,
-            IconSyncing,
-            IconUnknown
         }
     };
 </script>
