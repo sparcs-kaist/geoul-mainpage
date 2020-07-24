@@ -16,7 +16,7 @@
 
             <div class="Usage__links">
                 <a href="http://ftp.kaist.ac.kr/geoul/usage/reports/webalizer/" target="_blank"> {{ $t('all') }} </a>
-                <a :href="getUrl(target)" v-for="target in targets" :key="target"> {{ target }} </a>
+                <a :href="getUrl(target)" v-for="target in targets" :key="target" target="_blank"> {{ target }} </a>
             </div>
         </div>
     </section>
