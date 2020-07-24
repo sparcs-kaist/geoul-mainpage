@@ -13,6 +13,7 @@
                 <TheNotifications />
                 <TheSpeedTest />
                 <TheFeeds />
+                <TheUsage />
                 <TheSpec />
                 <TheContact />
             </aside>
@@ -60,6 +61,7 @@
                 margin: 0;
                 font-family: var(--title-font);
                 font-size: 1.6rem;
+                font-weight: 700;
 
                 &:first-child {
                     padding-top: 0;
@@ -99,14 +101,14 @@
     import TheSpec from "@/components/TheSpec";
     import TheSpeedTest from "@/components/TheSpeedTest";
     import TheTopbar from "@/components/TheTopbar";
+    import TheUsage from "@/components/TheUsage";
 
     export default {
         async asyncData({ $axios }) {
-            const { timestamp, package: packages } = await $axios.$get('/geoul/status.json');
+            const { package: packages } = await $axios.$get('/geoul/status.json');
             const packageNames = Object.keys(packages);
 
             return {
-                timestamp,
                 packageNames
             };
         },
@@ -122,7 +124,8 @@
             ThePackages,
             TheSpec,
             TheSpeedTest,
-            TheTopbar
+            TheTopbar,
+            TheUsage
         }
     };
 </script>
