@@ -1,3 +1,6 @@
+@import "../fonts/nanumbarunroboto/stylesheet.css";
+@import "../fonts/iosevka/stylesheet.css";
+
 :root {
     --title-font: 'Ubuntu', 'NanumBarunRoboto', sans-serif;
     --content-font: 'NanumBarunRoboto', sans-serif;
