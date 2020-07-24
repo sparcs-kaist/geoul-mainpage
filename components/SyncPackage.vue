@@ -1,11 +1,28 @@
 <template>
-    <div class="SyncPackage">
-        <a :href="packageLink" class="SyncPackage__row">
-            <component class="SyncPackage__icon" :is="packageStatus" />
-            <span class="SyncPackage__name"> {{ packageName }} </span>
+    <div class="SyncPackage" :class="statusClass">
+        <div class="SyncPackage__row">
+            <a :href="packageLink" class="SyncPackage__body SyncPackage__body--full">
+                <SyncPackageIcon class="SyncPackage__icon" :package="package" />
+                <span class="SyncPackage__name"> {{ packageName }} </span>
+            </a>
 
-            <SyncPackageDialog class="SyncPackage__dialog" :package="package" />
-        </a>
+            <div class="SyncPackage__body SyncPackage__info"
+                @mouseenter="openDialog(1)"
+                @mouseleave="closeDialog(1)"
+            >
+                <button class="SyncPackage__info__button"> <!-- @click="toggleDialog(2)"> -->
+                    <IconInformation class="SyncPackage__info__icon" />
+                </button>
+
+                <transition name="DialogFade">
+                    <SyncPackageDialog class="SyncPackage__dialog"
+                        :class="`SyncPackage__dialog--${dialog}`"
+                        :package="package"
+                        v-if="dialog"
+                    />
+                </transition>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -16,20 +33,48 @@
         flex: 0 0 50%;
         padding: 0 5px;
         box-sizing: border-box;
-        position: relative;
 
         &__row {
             display: flex;
-            align-items: center;
-
-            background: var(--background-darken-1);
-            padding: 15px 20px;
-            border-radius: 5px;
+            align-items: stretch;
             margin: 5px 0;
+            border-left: 5px solid var(--background-darken-2);
+            border-radius: 5px;
+        }
+
+        &__body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 0;
+            padding: 15px 20px;
 
             color: var(--text);
             font-family: var(--content-font);
             text-decoration: none;
+
+            background: var(--background-darken-1);
+            transition: background .4s ease;
+
+            &--full {
+                justify-content: flex-start;
+                flex: 1;
+            }
+
+            &:hover {
+                background: var(--background);
+            }
+
+            &:first-child {
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+            &:last-child {
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
         }
 
         &__icon {
@@ -41,17 +86,85 @@
         &__name {
             font-size: 1.3rem;
             font-weight: 300;
+            flex: 1;
+            width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &__info {
+            position: relative;
+            padding: 0;
+
+            /* &:hover > .SyncPackage__dialog {
+                visibility: visible;
+                opacity: 1;
+                pointer-events: all;
+            } */
+
+            &__icon {
+                fill: var(--background-darken-2);
+            }
+
+            &__button {
+                background: transparent;
+                padding: 15px 20px;
+            }
         }
 
         &__dialog {
-            visibility: hidden;
+            /* visibility: hidden;
+            opacity: 0;
+            pointer-events: none; */
             position: absolute;
             top: 0;
-            left: 20vw;
+            left: 40px;
+            transition: opacity .4s ease, visibility .4s ease;
         }
 
-        &:hover &__dialog {
-            visibility: visible;
+        &--active &__row {
+            border-color: var(--status-active);
+        }
+
+        &--failed &__row {
+            border-color: var(--status-error);
+        }
+
+        &--syncing &__row {
+            border-color: var(--status-syncing);
+        }
+    }
+
+    .DialogFade {
+        &-enter, &-leave-to {
+            opacity: 0;
+        }
+
+        &-leave-to {
+            pointer-events: none;
+        }
+
+        &-enter-active, &-leave-active {
+            transition: opacity .4s ease;
+        }
+    }
+
+    @media(--under-lg) {
+        .SyncPackage .SyncPackage__dialog {
+            left: 0;
+            max-width: 35vw;
+        }
+    }
+
+    @media(--under-md) {
+        .SyncPackage .SyncPackage__dialog {
+            max-width: 40vw;
+        }
+
+        .SyncPackage:nth-child(2n) .SyncPackage__dialog {
+            left: inherit;
+            right: 40px;
         }
     }
 
@@ -59,20 +172,30 @@
         .SyncPackage {
             flex: 1 0 100%;
         }
+
+        .SyncPackage .SyncPackage__dialog {
+            left: inherit;
+            right: 0 !important;
+            max-width: 60vw;
+        }
     }
 </style>
 
 <script>
     import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
-    import IconActive from "@/assets/images/IconActive.svg?inline";
-    import IconFailed from "@/assets/images/IconFailed.svg?inline";
-    import IconSyncing from "@/assets/images/IconSyncing.svg?inline";
-    import IconUnknown from "@/assets/images/IconUnknown.svg?inline";
+    import IconInformation from "@/assets/images/IconInformation.svg?inline";
     import SyncPackageDialog from "@/components/SyncPackageDialog";
+    import SyncPackageIcon from "@/components/SyncPackageIcon";
 
     export default {
         name: 'SyncPackage',
+
+        data() {
+            return {
+                dialog: false
+            };
+        },
 
         props: {
             packageName: {
@@ -93,31 +216,48 @@
                 return `/${encodeURIComponent(this.packageName)}`;
             },
 
-            packageStatus() {
+            statusClass() {
                 const status = this.package.status;
 
                 if(!status)
-                    return 'IconUnknown';
+                    return 'SyncPackage--unknown';
 
                 if(status.updating)
-                    return 'IconSyncing';
+                    return 'SyncPackage--syncing';
 
                 if(status.failed)
-                    return 'IconFailed';
+                    return 'SyncPackage--failed';
 
                 if(status.updated)
-                    return 'IconActive';
+                    return 'SyncPackage--active';
 
-                return 'IconUnknown';
+                return 'SyncPackage--unknown';
+            }
+        },
+
+        methods: {
+            openDialog(mode) {
+                this.dialog = Math.max(this.dialog, mode);
+            },
+
+            closeDialog(mode) {
+                if(this.dialog <= mode)
+                    this.dialog = 0;
+            },
+
+            toggleDialog(mode) {
+                if(this.dialog < mode)
+                    this.openDialog(mode);
+
+                else
+                    this.closeDialog(mode);
             }
         },
 
         components: {
-            IconActive,
-            IconFailed,
-            IconSyncing,
-            IconUnknown,
-            SyncPackageDialog
+            IconInformation,
+            SyncPackageDialog,
+            SyncPackageIcon
         }
     };
 </script>

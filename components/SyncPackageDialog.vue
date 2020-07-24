@@ -1,7 +1,13 @@
 <template>
     <section class="SyncPackageDialog">
+        <!--
+            <span class="SyncPackageDialog__pin">
+                {{ $t('click-to-pin') }}
+            </span>
+        -->
+
         <div class="SyncPackageDialog__header">
-            <component class="SyncPackageDialog__icon" :is="packageStatus" />
+            <SyncPackageIcon class="SyncPackageDialog__icon" :package="package" />
             <h1 class="SyncPackageDialog__title">
                 {{ package.name }}
             </h1>
@@ -20,6 +26,15 @@
                 <div class="SyncPackageDialog__key"> {{ $t('interval') }} </div>
                 <div class="SyncPackageDialog__value"> {{ interval }} </div>
             </template>
+
+            <template v-if="links && links.length > 0">
+                <div class="SyncPackageDialog__key"> {{ $t('link') }} </div>
+                <div class="SyncPackageDialog__value SyncPackageDialog__value--links">
+                    <a v-for="link in links" :href="link.href" :key="link.rel">
+                        {{ link.rel }}
+                    </a>
+                </div>
+            </template>
         </div>
 
         <div v-if="hasUpdate">
@@ -34,6 +49,12 @@
                 </template>
             </div>
         </div>
+
+        <div class="SyncPackageDialog__usage" :class="{ 'SyncPackageDialog__usage--show': image }">
+            <div class="SyncPackageDialog__img-wrapper">
+                <img :src="diskUsage" @load="showImage" />
+            </div>
+        </div>
     </section>
 </template>
 
@@ -42,11 +63,15 @@
         source: '소스'
         interval: '간격'
         updates: '업데이트'
+        link: '링크'
+        click-to-pin: '메뉴버튼을 클릭해서 고정하실 수 있습니다.'
 
     en:
         source: 'Source'
         interval: 'Interval'
         updates: 'Updates'
+        link: 'Links'
+        click-to-pin: 'Click the menu button to pin.'
 </i18n>
 
 <style scoped>
@@ -57,8 +82,12 @@
         padding: 30px 30px;
         box-shadow: 0 4px 15px 0 rgba(0, 0, 0, .15);
         width: 400px;
-        max-width: 60vw;
+        max-width: 40vw;
         z-index: 2;
+
+        &__pin {
+            margin-bottom: 10px;
+        }
 
         &__header {
             display: flex;
@@ -70,12 +99,22 @@
             white-space: nowrap;
             margin-left: 10px;
             font-size: .9rem;
+            flex-shrink: 0;
         }
 
         &__title {
             font-family: var(--title-font);
             font-size: 1.5rem;
             margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-shrink: 1;
+
+            &:hover {
+                white-space: inherit;
+                word-break: break-all;
+            }
         }
 
         &__icon {
@@ -83,6 +122,7 @@
             width: 1.5rem;
             height: 1.5rem;
             margin-right: 15px;
+            flex-shrink: 0;
         }
 
         &__desc {
@@ -108,6 +148,21 @@
                 white-space: inherit;
                 word-wrap: break-word;
             }
+
+            &--links {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0 -5px;
+
+                &:hover {
+                    white-space: nowrap;
+                    word-wrap: normal;
+                }
+
+                & > a {
+                    margin: 0 5px;
+                }
+            }
         }
 
         &__updates {
@@ -121,15 +176,33 @@
             margin-bottom: 0;
             font-size: 1.3rem;
         }
+
+        &__img-wrapper {
+            display: flex;
+            overflow: hidden;
+
+            height: 0;
+
+            & > img {
+                width: calc(100% + 6px);
+                object-fit: contain;
+
+                margin-top: -3px;
+                margin-left: -3px;
+                margin-bottom: -3px;
+            }
+        }
+
+        &__usage--show &__img-wrapper {
+            height: auto;
+            margin-top: 10px;
+        }
     }
 </style>
 
 <script>
-    import IconActive from "@/assets/images/IconActive.svg?inline";
-    import IconFailed from "@/assets/images/IconFailed.svg?inline";
-    import IconSyncing from "@/assets/images/IconSyncing.svg?inline";
-    import IconUnknown from "@/assets/images/IconUnknown.svg?inline";
     import SyncPackageUpdate from "@/components/SyncPackageUpdate";
+    import SyncPackageIcon from "@/components/SyncPackageIcon";
 
     import dateLocale from "@/assets/js/dateLocale";
     import { formatDistanceToNow, formatDuration } from "date-fns";
@@ -137,6 +210,12 @@
 
     export default {
         name: 'SyncPackageDialog',
+
+        data() {
+            return {
+                image: false
+            };
+        },
 
         props: {
             package: {
@@ -146,24 +225,6 @@
         },
 
         computed: {
-            packageStatus() {
-                const status = this.package.status;
-
-                if(!status)
-                    return 'IconUnknown';
-
-                if(status.updating)
-                    return 'IconSyncing';
-
-                if(status.failed)
-                    return 'IconFailed';
-
-                if(status.updated)
-                    return 'IconActive';
-
-                return 'IconUnknown';
-            },
-
             lastUpdate() {
                 const status = this.package.status;
                 if(!status || !status.updated || !status.updated.timestamp)
@@ -198,6 +259,10 @@
                 );
             },
 
+            links() {
+                return this.package.link;
+            },
+
             updates() {
                 return this.package.status || {};
             },
@@ -208,14 +273,21 @@
 
             success() {
                 return this.updates.updated && !this.updates.updating && !this.updates.failed;
+            },
+
+            diskUsage() {
+                return `http://ftp.kaist.ac.kr/geoul/pkgs/${this.package.id}/du.png`;
+            }
+        },
+
+        methods: {
+            showImage() {
+                this.image = true;
             }
         },
 
         components: {
-            IconActive,
-            IconFailed,
-            IconSyncing,
-            IconUnknown,
+            SyncPackageIcon,
             SyncPackageUpdate
         }
     };
