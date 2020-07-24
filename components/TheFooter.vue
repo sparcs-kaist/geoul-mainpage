@@ -1,7 +1,12 @@
 <template>
     <footer class="Footer">
         <div class="Footer__content">
-            <SparcsLogo class="Footer__logo" />
+            <div class="Footer__poweredby">
+                <a href="https://sparcs.org" target="_blank" rel="noopener">
+                    <SparcsLogo class="Footer__logo" />
+                </a>
+            </div>
+
             <div class="Footer__location">
                 <span class="Footer__location-text"> {{ $t('location-1') }} </span>
                 <span class="Footer__location-text"> {{ $t('location-2') }} </span>
@@ -35,6 +40,7 @@
         &__content {
             display: flex;
             flex-direction: column;
+            align-items: flex-start;
 
             max-width: 900px;
             margin: 0 auto;
@@ -68,6 +74,7 @@
         &__email {
             color: var(--background-darken-2);
             font-family: var(--code-font);
+            font-weight: 600;
             text-decoration: none;
         }
     }
