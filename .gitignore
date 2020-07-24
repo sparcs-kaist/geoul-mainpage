@@ -1,4 +1,4 @@
 .env
 .nuxt
 node_modules
-
+dist
