@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "analyze": "cross-env NODE_ENV=production nuxt build --analyze",
     "build": "cross-env NODE_ENV=production nuxt build",
     "export": "cross-env NODE_ENV=production nuxt export"
   },
