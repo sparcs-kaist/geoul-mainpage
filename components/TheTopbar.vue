@@ -5,9 +5,9 @@
         </div>
 
         <div class="Topbar__links">
-            <nuxt-link class="Topbar__link" :to="switchLocalePath(alternativeLang)">
+            <button class="Topbar__link" @click="changeLocale(alternativeLang)">
                 {{ $t('toggle-lang') }}
-            </nuxt-link>
+            </button>
         </div>
     </div>
 </template>
@@ -46,6 +46,8 @@
             align-items: center;
             padding: 15px 20px;
 
+            font-size: 1rem;
+            background: transparent;
             color: var(--link);
             font-family: var(--content-font);
             font-weight: 600;
@@ -72,6 +74,13 @@
                 const currentLocale = this.$root.$i18n.locale;
 
                 return locales.find(locale => locale !== currentLocale);
+            }
+        },
+
+        methods: {
+            changeLocale() {
+                console.log(this.$root);
+                this.$root.$i18n.setLocale(this.alternativeLang);
             }
         },
 
