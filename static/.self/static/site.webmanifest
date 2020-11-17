@@ -1,0 +1,19 @@
+{
+    "name": "KAIST Mirror",
+    "short_name": "KAIST Mirror",
+    "icons": [
+        {
+            "src": "/.self/static/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/.self/static/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#47759f",
+    "background_color": "#47759f",
+    "display": "standalone"
+}

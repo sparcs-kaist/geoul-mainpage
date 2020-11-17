@@ -1,8 +1,8 @@
 <template>
     <div class="Topbar">
-        <div class="Topbar__branding">
+        <nuxt-link to="/" class="Topbar__branding">
             <GeoulLogo class="Topbar__logo" />
-        </div>
+        </nuxt-link>
 
         <div class="Topbar__links">
             <button class="Topbar__link" @click="changeLocale(alternativeLang)">

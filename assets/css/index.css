@@ -43,7 +43,7 @@ a {
     color: var(--link);
 }
 
-button {
+button, .Button {
     cursor: pointer;
     background: var(--highlight);
     border: none;
