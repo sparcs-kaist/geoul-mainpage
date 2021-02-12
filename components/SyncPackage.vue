@@ -213,7 +213,7 @@
 
         computed: {
             packageLink() {
-                return `/${encodeURIComponent(this.packageName)}`;
+                return `/${encodeURIComponent(this.packageName)}/`;
             },
 
             statusClass() {
