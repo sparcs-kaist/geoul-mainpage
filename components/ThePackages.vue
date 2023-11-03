@@ -158,6 +158,13 @@
             };
         },
 
+        props: {
+            packageNames: {
+                type: Array,
+                required: true
+            }
+        },
+
         computed: {
             counts() {
                 return Object.keys(this.packages).reduce((counts, packageName) => {
@@ -182,7 +189,7 @@
             },
 
             packageNamesSorted() {
-                const names = Object.keys(this.packages)
+                const names = this.packageNames
                     .sort((pkg1, pkg2) => pkg1.localeCompare(pkg2));
 
                 const etc = [];
