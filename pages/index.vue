@@ -5,7 +5,7 @@
             <div class="Index__column">
                 <TheOptOut />
                 <TheDescriptions />
-                <ThePackages :package-names="packageNames" />
+                <ThePackages />
             </div>
 
             <aside class="Index__column Index__column--side">
@@ -104,15 +104,6 @@
     import TheUsage from "@/components/TheUsage";
 
     export default {
-        async asyncData({ $axios }) {
-            const { package: packages } = await $axios.$get('/geoul/status.json');
-            const packageNames = Object.keys(packages);
-
-            return {
-                packageNames
-            };
-        },
-
         components: {
             TheContact,
             TheDescriptions,

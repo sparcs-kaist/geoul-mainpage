@@ -158,16 +158,9 @@
             };
         },
 
-        props: {
-            packageNames: {
-                type: Array,
-                required: true
-            }
-        },
-
         computed: {
             counts() {
-                return this.packageNames.reduce((counts, packageName) => {
+                return Object.keys(this.packages).reduce((counts, packageName) => {
                     const packageStatus = this.packages[packageName].status;
                     if(!packageStatus)
                         return counts;
@@ -189,7 +182,7 @@
             },
 
             packageNamesSorted() {
-                const names = this.packageNames
+                const names = Object.keys(this.packages)
                     .sort((pkg1, pkg2) => pkg1.localeCompare(pkg2));
 
                 const etc = [];
