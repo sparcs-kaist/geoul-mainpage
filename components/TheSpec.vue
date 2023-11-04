@@ -73,7 +73,7 @@
                     { category: 'spec-cpu', value: 'Xeon E5-2620' },
                     { category: 'spec-ram', value: '64 GiB' },
                     { category: 'spec-stor', value: '72TiB RAID-6' },
-                    { category: 'spec-net', value: '2 × 1Gbps' },
+                    { category: 'spec-net', value: '10Gbps' },
                     { category: 'spec-loc', value: 'Daejeon, South Korea' }
                 ]
             };
