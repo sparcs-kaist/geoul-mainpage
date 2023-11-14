@@ -167,7 +167,7 @@
 
         computed: {
             counts() {
-                return this.packageNames.reduce((counts, packageName) => {
+                return Object.keys(this.packages).reduce((counts, packageName) => {
                     const packageStatus = this.packages[packageName].status;
                     if(!packageStatus)
                         return counts;

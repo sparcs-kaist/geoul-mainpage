@@ -61,13 +61,15 @@ module.exports = {
 
     build: {
         postcss: {
-            plugins: [
-                require('postcss-nested'),
-                require('postcss-preset-env')({
-                    importFrom: "./assets/css/index.css",
-                    stage: 0
-                })
-            ]
+            postcssOptions: {
+                plugins: [
+                    require('postcss-nested'),
+                    require('postcss-preset-env')({
+                        importFrom: "./assets/css/index.css",
+                        stage: 0
+                    })
+                ]
+            }
         },
 
         extend(config) {
