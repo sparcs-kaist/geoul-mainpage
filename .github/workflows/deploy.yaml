@@ -1,6 +1,7 @@
 name: Geoul Mainpage Deploy
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
