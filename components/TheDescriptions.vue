@@ -62,7 +62,7 @@
             If you have any problems or suggestions, please contact us by {email}.
             Thank you.
 
-        desclaimer: 'Desclaimer'
+        desclaimer: 'Disclaimer'
         desclaimer-content:
             - >
                 Use entirely at your own risk -- no warranty is expressed or implied.
