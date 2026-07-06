@@ -131,12 +131,32 @@ export default defineNuxtConfig({
 
         prerender: {
             crawlLinks: false,
-            routes: ['/', '/_gen/403', '/_gen/404']
+            // '/_error/403' and '/_error/404' are not Nuxt pages - they don't
+            // match any route. They exist purely so the routeRules below can
+            // force nitro's noSSR (SPA-shell) renderer to run for them during
+            // `nuxt generate`. That renderer never touches Vue Router/page
+            // matching and never bakes a route-specific hydration payload
+            // (see routeRules comment), which is what previously caused the
+            // browser to be redirected to /_gen/404 on unknown URLs. The
+            // resulting shells are relocated to static/403.html and
+            // static/404.html by scripts/postgenerate.mjs and are never
+            // shipped as live client routes.
+            routes: ['/', '/_error/403', '/_error/404']
         }
     },
 
     routeRules: {
-        '/geoul/**': { proxy: 'http://ftp.kaist.ac.kr/geoul/**' }
+        '/geoul/**': { proxy: 'http://ftp.kaist.ac.kr/geoul/**' },
+
+        // Force the same noSSR "SPA shell" renderer nitro already uses for
+        // /200.html and /404.html (see PRERENDER_NO_SSR_ROUTES in
+        // @nuxt/nitro-server). That renderer skips Vue Router matching
+        // entirely, so the emitted HTML carries no baked route/path in its
+        // hydration payload. Without this, hydrating the static error
+        // document on an unrelated URL would make Nuxt trust the baked path
+        // over the real browser URL and force-navigate to it.
+        '/_error/403': { ssr: false },
+        '/_error/404': { ssr: false }
     },
 
     security: {
