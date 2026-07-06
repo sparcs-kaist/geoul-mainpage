@@ -66,6 +66,25 @@ export default defineNuxtConfig({
 
     modules: ['@nuxtjs/i18n', 'nuxt-security'],
 
+    hooks: {
+        // buildAssetsDir ('/static/') is registered as a non-top-level Nitro
+        // public asset, which defaults to fallthrough: false. That makes
+        // Nitro's prerenderer skip ANY route under /static/** outright
+        // (see publicAssetBases check in nitropack's prerender()), which
+        // silently drops the @nuxtjs/i18n messages.json routes once
+        // serverRoutePrefix is moved under /static/_i18n. Allow fallthrough
+        // so unmatched /static/** requests reach the dynamic i18n route
+        // during the (local, build-time only) prerender pass.
+        'nitro:config': (nitroConfig) => {
+            const buildAssetsEntry = nitroConfig.publicAssets?.find(
+                (asset) => asset.baseURL === '/static/'
+            );
+            if (buildAssetsEntry) {
+                buildAssetsEntry.fallthrough = true;
+            }
+        }
+    },
+
     experimental: {
         payloadExtraction: false,
         appManifest: false
@@ -78,7 +97,8 @@ export default defineNuxtConfig({
         bundle: {
             compositionOnly: false
         },
-        vueI18n: './i18n.config.ts'
+        vueI18n: './i18n.config.ts',
+        serverRoutePrefix: '/static/_i18n'
     },
 
     vite: {
