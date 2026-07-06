@@ -104,6 +104,8 @@
             } */
 
             &__icon {
+                width: 3px;
+                height: 19px;
                 fill: var(--background-darken-2);
             }
 

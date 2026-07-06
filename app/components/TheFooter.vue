@@ -47,6 +47,8 @@
         }
 
         &__logo {
+            width: 227px;
+            height: 59px;
             margin-bottom: 20px;
 
             path {

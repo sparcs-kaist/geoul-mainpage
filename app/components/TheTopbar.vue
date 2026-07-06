@@ -32,6 +32,8 @@
         }
 
         &__logo {
+            width: 220px;
+            height: 48px;
             fill: var(--text);
         }
 

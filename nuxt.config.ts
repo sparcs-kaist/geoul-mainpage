@@ -102,7 +102,16 @@ export default defineNuxtConfig({
     },
 
     vite: {
-        plugins: [svgLoader()],
+        plugins: [
+            svgLoader({
+                svgoConfig: {
+                    plugins: [
+                        { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
+                        'removeDimensions'
+                    ]
+                }
+            })
+        ],
         assetsInclude: ['**/*.blob'],
 
         build: {
