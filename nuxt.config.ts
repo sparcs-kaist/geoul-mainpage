@@ -107,7 +107,7 @@ export default defineNuxtConfig({
                 'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
                 'font-src': ["'self'", 'https://fonts.gstatic.com'],
                 'img-src': ["'self'", 'data:', 'https://pbs.twimg.com', 'https://syndication.twitter.com'],
-                'frame-src': ['https://platform.twitter.com'],
+                'frame-src': ['https://platform.twitter.com', 'https://syndication.twitter.com'],
                 'connect-src': ["'self'", 'https://syndication.twitter.com', 'https://cdn.syndication.twimg.com']
             },
             crossOriginEmbedderPolicy: 'unsafe-none'
