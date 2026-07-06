@@ -44,7 +44,7 @@
             }
         }
 
-        & >>> .Section {
+        & :deep(.Section) {
             padding: 50px;
             margin: 20px 0;
             background: var(--background-lighten-1);
@@ -104,21 +104,26 @@
     import TheUsage from "@/components/TheUsage";
 
     export default {
-        async asyncData({ $axios }) {
-            const url = process.server
+        async setup() {
+            const url = import.meta.server
                 ? 'http://ftp.kaist.ac.kr/geoul/status.json'
                 : '/geoul/status.json';
 
-            try {
-                const { package: packages } = await $axios.$get(url);
-                return {
-                    packageNames: Object.keys(packages)
-                };
-            } catch (e) {
-                return {
-                    packageNames: []
-                };
-            }
+            const { data: packageNames } = await useAsyncData(
+                'index-status',
+                async () => {
+                    try {
+                        return await $fetch(url);
+                    } catch (e) {
+                        return { package: {} };
+                    }
+                },
+                { transform: (res) => Object.keys(res?.package || {}) }
+            );
+
+            return {
+                packageNames
+            };
         },
 
         components: {

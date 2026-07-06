@@ -145,9 +145,9 @@
 </style>
 
 <script>
-    import IconActive from "@/assets/images/IconActive.svg?inline";
-    import IconFailed from "@/assets/images/IconFailed.svg?inline";
-    import IconSyncing from "@/assets/images/IconSyncing.svg?inline";
+    import IconActive from "@/assets/images/IconActive.svg?component";
+    import IconFailed from "@/assets/images/IconFailed.svg?component";
+    import IconSyncing from "@/assets/images/IconSyncing.svg?component";
     import SyncPackage from "@/components/SyncPackage";
 
     export default {
@@ -162,7 +162,7 @@
         props: {
             packageNames: {
                 type: Array,
-                required: true
+                default: () => []
             }
         },
 
@@ -223,7 +223,7 @@
 
         async mounted() {
             try {
-                const { package: packages } = await this.$axios.$get('/geoul/status.json');
+                const { package: packages } = await $fetch('/geoul/status.json');
                 if (packages && typeof packages === 'object') {
                     this.packages = packages;
                 }

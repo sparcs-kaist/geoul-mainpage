@@ -137,7 +137,7 @@
     }
 
     .DialogFade {
-        &-enter, &-leave-to {
+        &-enter-from, &-leave-to {
             opacity: 0;
         }
 
@@ -182,9 +182,7 @@
 </style>
 
 <script>
-    import formatDistanceToNow from "date-fns/formatDistanceToNow";
-
-    import IconInformation from "@/assets/images/IconInformation.svg?inline";
+    import IconInformation from "@/assets/images/IconInformation.svg?component";
     import SyncPackageDialog from "@/components/SyncPackageDialog";
     import SyncPackageIcon from "@/components/SyncPackageIcon";
 

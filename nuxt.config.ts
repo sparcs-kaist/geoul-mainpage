@@ -86,6 +86,11 @@ export default defineNuxtConfig({
                 target: 'http://ftp.kaist.ac.kr/geoul',
                 changeOrigin: true
             }
+        },
+
+        prerender: {
+            crawlLinks: false,
+            routes: ['/']
         }
     },
 

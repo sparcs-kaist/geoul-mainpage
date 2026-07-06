@@ -21,32 +21,32 @@
 
             <div class="SpeedTest__end" key="result" v-else-if="sectionName === 'result'">
                 <p class="SpeedTest__desc">
-                    <i18n path="filesize" tag="div">
+                    <i18n-t keypath="filesize" tag="div">
                         <template #filesize>
                             <span class="SpeedTest__value">
                                 30
                                 {{ $t('mib') }}
                             </span>
                         </template>
-                    </i18n>
+                    </i18n-t>
 
-                    <i18n path="elapsed" tag="div">
+                    <i18n-t keypath="elapsed" tag="div">
                         <template #elapsed>
                             <span class="SpeedTest__value">
                                 {{ elapsed }}
                                 {{ $t('seconds') }}
                             </span>
                         </template>
-                    </i18n>
+                    </i18n-t>
 
-                    <i18n path="speed" tag="div">
+                    <i18n-t keypath="speed" tag="div">
                         <template #speed>
                             <span class="SpeedTest__value">
                                 {{ speed }}
                                 {{ $t('mibps') }}
                             </span>
                         </template>
-                    </i18n>
+                    </i18n-t>
                 </p>
 
                 <button class="SpeedTest__button" @click="startTest">
@@ -139,7 +139,7 @@
 </style>
 
 <script>
-    import randomBlob from "@/assets/blobs/random.blob";
+    import randomBlob from "@/assets/blobs/random.blob?url";
 
     export default {
         data() {

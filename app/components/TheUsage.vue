@@ -3,8 +3,8 @@
         <h1 class="Section__title"> {{ $t('usage') }} </h1>
 
         <div class="Usage__content">
-            <i18n class="Usage__desc" path="usage-desc" tag="p" />
-            <i18n class="Usage__desc" path="usage-desc-login" tag="p">
+            <i18n-t class="Usage__desc" keypath="usage-desc" tag="p" />
+            <i18n-t class="Usage__desc" keypath="usage-desc-login" tag="p">
                 <template #username>
                     <code class="Usage__field">{{ username }}</code>
                 </template>
@@ -12,7 +12,7 @@
                 <template #password>
                     <code class="Usage__field">{{ password }}</code>
                 </template>
-            </i18n>
+            </i18n-t>
 
             <div class="Usage__links">
                 <a href="http://ftp.kaist.ac.kr/geoul/usage/reports/webalizer/" target="_blank"> {{ $t('all') }} </a>

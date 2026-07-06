@@ -10,13 +10,13 @@
             </p>
 
             <div class="Error__buttons">
-                <button class="Error__button Error__button--highlight" @click="$router.go(-1)">
+                <button class="Error__button Error__button--highlight" @click="goBack">
                     {{ $t('back') }}
                 </button>
 
-                <nuxt-link class="Error__button Button" to="/">
+                <NuxtLink class="Error__button Button" to="/">
                     {{ $t('home') }}
-                </nuxt-link>
+                </NuxtLink>
             </div>
         </main>
     </div>
@@ -106,43 +106,37 @@
         home: 'Go to home'
 </i18n>
 
-<script>
-    import TheFooter from "@/components/TheFooter";
+<script setup>
     import TheTopbar from "@/components/TheTopbar";
 
-    export default {
-        asyncData({ params, nuxtState }) {
-            const error = params.error;
-
-            if (!error) {
-                if (!nuxtState || !nuxtState.routePath) {
-                    return {};
-                }
-
-                const [, code ] = nuxtState.routePath.match(/\/errors\/([^\/]+)/);
-                return { originalError: code };
-            } else {
-                return { originalError: error };
-            }
-        },
-
-        computed: {
-            error() {
-                return this.originalError || 'unknown';
-            },
-
-            code() {
-                return this.$t(`code-${this.error}`);
-            },
-
-            description() {
-                return this.$t(`description-${this.error}`);
-            }
-        },
-
-        components: {
-            TheFooter,
-            TheTopbar
+    const props = defineProps({
+        error: {
+            type: Object,
+            default: () => ({})
         }
-    };
+    });
+
+    const router = useRouter();
+    const { $i18n } = useNuxtApp();
+
+    const errorCode = computed(() => {
+        const statusCode = props.error?.statusCode;
+
+        if (statusCode === 403) {
+            return '403';
+        } else if (statusCode === 404) {
+            return '404';
+        } else if (statusCode >= 500 && statusCode < 600) {
+            return '50x';
+        }
+
+        return 'unknown';
+    });
+
+    const code = computed(() => $i18n.t(`code-${errorCode.value}`));
+    const description = computed(() => $i18n.t(`description-${errorCode.value}`));
+
+    function goBack() {
+        router.back();
+    }
 </script>

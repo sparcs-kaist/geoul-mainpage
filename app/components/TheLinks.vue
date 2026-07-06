@@ -2,11 +2,11 @@
     <section class="Links Section">
         <h1 class="Section__title"> {{ $t('links') }} </h1>
         <div class="Links__links">
-            <code class="Links__link" v-for="link in links">{{ link }}</code>
+            <code class="Links__link" v-for="link in links" :key="link">{{ link }}</code>
         </div>
         <h2 class="Links__subtitle"> {{ $t('aliases') }} </h2>
         <div class="Links__links">
-            <code class="Links__link" v-for="link in aliases"> {{ link }}</code>
+            <code class="Links__link" v-for="link in aliases" :key="link"> {{ link }}</code>
         </div>
     </section>
 </template>

@@ -81,7 +81,7 @@
 </style>
 
 <script>
-    import SparcsLogo from "@/assets/images/SparcsLogo.svg?inline";
+    import SparcsLogo from "@/assets/images/SparcsLogo.svg?component";
 
     import { addr, prefix } from "@/assets/js/mail";
 

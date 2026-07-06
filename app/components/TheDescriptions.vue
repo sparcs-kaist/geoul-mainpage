@@ -1,19 +1,19 @@
 <template>
     <section class="Descriptions Section">
         <h1 class="Section__title"> {{ $t('abstract') }} </h1>
-        <p class="Descriptions__paragraph" v-for="(text, index) in getI18nArray('abstract-content')">
+        <p class="Descriptions__paragraph" v-for="(text, index) in abstractContentArray" :key="index">
             {{ text }}
         </p>
-        <i18n class="Descriptions__paragraph" path="abstract-content-contact" tag="p">
+        <i18n-t class="Descriptions__paragraph" keypath="abstract-content-contact" tag="p">
             <template #email>
                 <a :href="mail.link" target="_blank">
                     {{ mail.mail }}
                 </a>
             </template>
-        </i18n>
+        </i18n-t>
 
         <h1 class="Section__title"> {{ $t('desclaimer') }} </h1>
-        <p class="Descriptions__paragraph" v-for="(text, index) in getI18nArray('desclaimer-content')">
+        <p class="Descriptions__paragraph" v-for="(text, index) in desclaimerContentArray" :key="index">
             {{ text }}
         </p>
     </section>
@@ -100,9 +100,19 @@
             };
         },
 
+        computed: {
+            abstractContentArray() {
+                return this.getI18nArray('abstract-content');
+            },
+
+            desclaimerContentArray() {
+                return this.getI18nArray('desclaimer-content');
+            }
+        },
+
         methods: {
             getI18nArray(key) {
-                return Object.keys(this.$i18n.messages[this.$i18n.locale][key])
+                return Object.keys(this.$i18n.getLocaleMessage(this.$i18n.locale)[key])
                     .map(index => this.$t(`${key}[${index}]`));
             }
         },

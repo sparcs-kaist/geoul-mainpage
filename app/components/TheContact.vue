@@ -33,26 +33,21 @@
     export default {
         name: 'TheContact',
 
-        data() {
-            return {
-                items: [
+        computed: {
+            items() {
+                return [
                     {
                         name: this.$t('twitter'),
                         url: 'https://twitter.com/kaist_ftp',
                         content: '@kaist_ftp',
+                    },
+                    {
+                        name: this.$t('email'),
+                        url: prefix() + addr(),
+                        content: addr()
                     }
-                ]
-            };
-        },
-
-        mounted() {
-            this.items.push(
-                {
-                    name: this.$t('email'),
-                    url: prefix() + addr(),
-                    content: addr()
-                }
-            );
+                ];
+            }
         },
 
         components: {

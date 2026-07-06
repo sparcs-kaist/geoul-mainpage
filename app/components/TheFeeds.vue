@@ -35,9 +35,9 @@
     export default {
         name: 'TheFeeds',
 
-        data() {
-            return {
-                items: [
+        computed: {
+            items() {
+                return [
                     {
                         name: this.$t('json-status'),
                         url: '/geoul/status.json'
@@ -57,8 +57,8 @@
                         name: this.$t('rss-failed'),
                         url: '/geoul/pkgs/problems.feed'
                     }
-                ]
-            };
+                ];
+            }
         },
 
         components: {
