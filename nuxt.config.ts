@@ -100,7 +100,32 @@ export default defineNuxtConfig({
 
     security: {
         headers: {
-            contentSecurityPolicy: false
+            contentSecurityPolicy: {
+                'base-uri': ["'self'"],
+                'object-src': ["'none'"],
+                'script-src': ["'self'", 'https://platform.twitter.com'],
+                'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+                'font-src': ["'self'", 'https://fonts.gstatic.com'],
+                'img-src': ["'self'", 'data:', 'https://pbs.twimg.com', 'https://syndication.twitter.com'],
+                'frame-src': ['https://platform.twitter.com'],
+                'connect-src': ["'self'", 'https://syndication.twitter.com', 'https://cdn.syndication.twimg.com']
+            },
+            crossOriginEmbedderPolicy: 'unsafe-none'
+        },
+
+        // Roll out enforcement gradually: header is emitted as
+        // Content-Security-Policy-Report-Only so nothing is blocked yet.
+        // Note: the <meta http-equiv> tag emitted for static hosting is
+        // always enforcing (browsers do not support report-only via meta),
+        // so this only relaxes delivery through the HTTP header.
+        contentSecurityPolicyReportOnly: true,
+
+        // nuxt generate is SSG: nonces are SSR-only, so rely on hashing
+        // the inline scripts Nuxt injects at prerender time instead.
+        ssg: {
+            hashScripts: true,
+            hashStyles: false,
+            meta: true
         }
     }
 });
