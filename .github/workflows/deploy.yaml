@@ -22,9 +22,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run proxy on background
-      run: npm run dev &
-
     - name: Build project
       run: npm run build
 

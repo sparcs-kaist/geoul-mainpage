@@ -105,12 +105,20 @@
 
     export default {
         async asyncData({ $axios }) {
-            const { package: packages } = await $axios.$get('/geoul/status.json');
-            const packageNames = Object.keys(packages);
+            const url = process.server
+                ? 'http://ftp.kaist.ac.kr/geoul/status.json'
+                : '/geoul/status.json';
 
-            return {
-                packageNames
-            };
+            try {
+                const { package: packages } = await $axios.$get(url);
+                return {
+                    packageNames: Object.keys(packages)
+                };
+            } catch (e) {
+                return {
+                    packageNames: []
+                };
+            }
         },
 
         components: {
