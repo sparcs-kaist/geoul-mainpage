@@ -2,7 +2,8 @@ import svgLoader from 'vite-svg-loader';
 
 export default defineNuxtConfig({
     app: {
-        buildAssetsDir: '/.self/static/nuxt/',
+        baseURL: '/',
+        buildAssetsDir: '/static/',
 
         head: {
             title: 'KAIST Mirror',
@@ -33,7 +34,7 @@ export default defineNuxtConfig({
                 { name: 'apple-mobile-web-app-capable', content: 'yes' },
 
                 { name: 'msapplication-TileColor', content: '#2b5797' },
-                { name: 'msapplication-config', content: '/.self/static/browserconfig.xml' },
+                { name: 'msapplication-config', content: '/static/assets/browserconfig.xml' },
 
                 { name: 'apple-mobile-web-app-title', content: 'KAIST Mirror' },
                 { name: 'application-name', content: 'KAIST Mirror' },
@@ -43,12 +44,12 @@ export default defineNuxtConfig({
 
             link: [
                 { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Ubuntu:700&display=swap' },
-                { rel: 'apple-touch-icon', sizes: '180x180', href: '/.self/static/apple-touch-icon.png' },
-                { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/.self/static/favicon-32x32.png' },
-                { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/.self/static/favicon-16x16.png' },
-                { rel: 'manifest', href: '/.self/static/site.webmanifest' },
-                { rel: 'mask-icon', href: '/.self/static/safari-pinned-tab.svg', color: '#47759f' },
-                { rel: 'shortcut icon', href: '/.self/static/favicon.ico' }
+                { rel: 'apple-touch-icon', sizes: '180x180', href: '/static/assets/apple-touch-icon.png' },
+                { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/static/assets/favicon-32x32.png' },
+                { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/static/assets/favicon-16x16.png' },
+                { rel: 'manifest', href: '/static/assets/site.webmanifest' },
+                { rel: 'mask-icon', href: '/static/assets/safari-pinned-tab.svg', color: '#47759f' },
+                { rel: 'shortcut icon', href: '/static/assets/favicon.ico' }
             ]
         }
     },
@@ -65,6 +66,11 @@ export default defineNuxtConfig({
 
     modules: ['@nuxtjs/i18n', 'nuxt-security'],
 
+    experimental: {
+        payloadExtraction: false,
+        appManifest: false
+    },
+
     i18n: {
         strategy: 'no_prefix',
         locales: ['en', 'ko'],
@@ -77,7 +83,22 @@ export default defineNuxtConfig({
 
     vite: {
         plugins: [svgLoader()],
-        assetsInclude: ['**/*.blob']
+        assetsInclude: ['**/*.blob'],
+
+        build: {
+            rollupOptions: {
+                output: {
+                    entryFileNames: 'static/js/[name].[hash].js',
+                    chunkFileNames: 'static/js/[name].[hash].js',
+                    assetFileNames: (assetInfo) => {
+                        if (assetInfo.name?.endsWith('.css')) {
+                            return 'static/css/[name].[hash][extname]';
+                        }
+                        return 'static/assets/[name].[hash][extname]';
+                    }
+                }
+            }
+        }
     },
 
     nitro: {
@@ -90,7 +111,7 @@ export default defineNuxtConfig({
 
         prerender: {
             crawlLinks: false,
-            routes: ['/']
+            routes: ['/', '/_gen/403', '/_gen/404']
         }
     },
 
