@@ -54,6 +54,12 @@ export default defineNuxtConfig({
         }
     },
 
+    vue: {
+        compilerOptions: {
+            whitespace: 'preserve'
+        }
+    },
+
     css: ['~/assets/css/index.css'],
 
     postcss: {
@@ -106,7 +112,15 @@ export default defineNuxtConfig({
             svgLoader({
                 svgoConfig: {
                     plugins: [
-                        { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
+                        {
+                            name: 'preset-default',
+                            params: {
+                                overrides: {
+                                    removeViewBox: false,
+                                    removeUselessStrokeAndFill: false
+                                }
+                            }
+                        },
                         'removeDimensions'
                     ]
                 }

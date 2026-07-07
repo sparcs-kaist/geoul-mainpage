@@ -6,9 +6,7 @@
         </p>
         <i18n-t class="Descriptions__paragraph" keypath="abstract-content-contact" tag="p">
             <template #email>
-                <a :href="mail.link" target="_blank">
-                    {{ mail.mail }}
-                </a>
+                <a :href="mail.link" target="_blank">{{ mail.mail }}{{ ' ' }}</a>
             </template>
         </i18n-t>
 

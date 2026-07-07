@@ -51,7 +51,7 @@
             height: 59px;
             margin-bottom: 20px;
 
-            path {
+            :deep(path) {
                 fill: var(--text);
             }
         }
