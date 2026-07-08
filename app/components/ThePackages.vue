@@ -32,6 +32,7 @@
             <div
                 class="Packages__category"
                 v-for="(packageNameList, packageCategory) in packageNamesSorted"
+                :key="packageCategory"
             >
                 <h2 class="Packages__category-title">
                     {{ packageCategory.toUpperCase() }}
@@ -144,9 +145,9 @@
 </style>
 
 <script>
-    import IconActive from "@/assets/images/IconActive.svg?inline";
-    import IconFailed from "@/assets/images/IconFailed.svg?inline";
-    import IconSyncing from "@/assets/images/IconSyncing.svg?inline";
+    import IconActive from "@/assets/images/IconActive.svg?component";
+    import IconFailed from "@/assets/images/IconFailed.svg?component";
+    import IconSyncing from "@/assets/images/IconSyncing.svg?component";
     import SyncPackage from "@/components/SyncPackage";
 
     export default {
@@ -161,18 +162,23 @@
         props: {
             packageNames: {
                 type: Array,
-                required: true
+                default: () => []
             }
         },
 
         computed: {
+            activePackageNames() {
+                return this.loaded ? Object.keys(this.packages) : this.packageNames;
+            },
+
             counts() {
-                return this.packageNames.reduce((counts, packageName) => {
-                    const packageStatus = this.packages[packageName].status;
-                    if(!packageStatus)
+                return this.activePackageNames.reduce((counts, packageName) => {
+                    const pkg = this.packages[packageName];
+                    const packageStatus = pkg && pkg.status;
+                    if (!packageStatus)
                         return counts;
 
-                    if(packageStatus.updating) {
+                    if (packageStatus.updating) {
                         counts.syncing++;
                     } else if (packageStatus.failed) {
                         counts.failed++;
@@ -181,7 +187,7 @@
                     }
 
                     return counts;
-                }, { active: 0, syncing: 0, failed: 0});
+                }, { active: 0, syncing: 0, failed: 0 });
             },
 
             loaded() {
@@ -189,7 +195,7 @@
             },
 
             packageNamesSorted() {
-                const names = this.packageNames
+                const names = [...this.activePackageNames]
                     .sort((pkg1, pkg2) => pkg1.localeCompare(pkg2));
 
                 const etc = [];
@@ -216,8 +222,14 @@
         },
 
         async mounted() {
-            const { package: packages } = await this.$axios.$get('/geoul/status.json');
-            this.packages = packages;
+            try {
+                const { package: packages } = await $fetch('/geoul/status.json');
+                if (packages && typeof packages === 'object') {
+                    this.packages = packages;
+                }
+            } catch (e) {
+                // keep build-time packageNames as fallback
+            }
         },
 
         components: {

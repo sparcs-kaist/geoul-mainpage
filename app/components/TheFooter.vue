@@ -47,9 +47,11 @@
         }
 
         &__logo {
+            width: 227px;
+            height: 59px;
             margin-bottom: 20px;
 
-            path {
+            :deep(path) {
                 fill: var(--text);
             }
         }
@@ -81,7 +83,7 @@
 </style>
 
 <script>
-    import SparcsLogo from "@/assets/images/SparcsLogo.svg?inline";
+    import SparcsLogo from "@/assets/images/SparcsLogo.svg?component";
 
     import { addr, prefix } from "@/assets/js/mail";
 

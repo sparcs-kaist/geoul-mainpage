@@ -3,7 +3,7 @@
         <h1 class="Section__title"> {{ $t('specification') }} </h1>
 
         <div class="Spec__table">
-            <div class="Spec__row" v-for="item in items">
+            <div class="Spec__row" v-for="item in items" :key="item.category">
                 <div class="Spec__category">
                     {{ $t(item.category) }}
                 </div>

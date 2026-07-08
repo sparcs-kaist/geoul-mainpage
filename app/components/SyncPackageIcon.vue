@@ -24,10 +24,10 @@
 </style>
 
 <script>
-    import IconActive from "@/assets/images/IconActive.svg";
-    import IconFailed from "@/assets/images/IconFailed.svg";
-    import IconSyncing from "@/assets/images/IconSyncing.svg";
-    import IconUnknown from "@/assets/images/IconUnknown.svg";
+    import IconActive from "@/assets/images/IconActive.svg?url";
+    import IconFailed from "@/assets/images/IconFailed.svg?url";
+    import IconSyncing from "@/assets/images/IconSyncing.svg?url";
+    import IconUnknown from "@/assets/images/IconUnknown.svg?url";
 
     const icons = {
         IconActive, IconFailed, IconSyncing, IconUnknown

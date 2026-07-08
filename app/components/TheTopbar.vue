@@ -1,8 +1,8 @@
 <template>
     <div class="Topbar">
-        <nuxt-link to="/" class="Topbar__branding">
+        <NuxtLink to="/" class="Topbar__branding">
             <GeoulLogo class="Topbar__logo" />
-        </nuxt-link>
+        </NuxtLink>
 
         <div class="Topbar__links">
             <button class="Topbar__link" @click="changeLocale(alternativeLang)">
@@ -32,6 +32,8 @@
         }
 
         &__logo {
+            width: 220px;
+            height: 48px;
             fill: var(--text);
         }
 
@@ -63,15 +65,15 @@
 </style>
 
 <script>
-    import GeoulLogo from "@/assets/images/GeoulLogo.svg?inline";
+    import GeoulLogo from "@/assets/images/GeoulLogo.svg?component";
 
     export default {
         name: 'TheTopbar',
 
         computed: {
             alternativeLang() {
-                const locales = this.$root.$i18n.locales;
-                const currentLocale = this.$root.$i18n.locale;
+                const locales = this.$i18n.locales;
+                const currentLocale = this.$i18n.locale;
 
                 return locales.find(locale => locale !== currentLocale);
             }
@@ -79,7 +81,7 @@
 
         methods: {
             changeLocale() {
-                this.$root.$i18n.setLocale(this.alternativeLang);
+                this.$i18n.setLocale(this.alternativeLang);
             }
         },
 

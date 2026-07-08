@@ -1,6 +1,6 @@
 <template>
     <div class="LinkItems">
-        <div class="LinkItems__item LinkItem" v-for="item in items">
+        <div class="LinkItems__item LinkItem" v-for="item in items" :key="item.url">
             <h2 class="LinkItem__title">
                 {{ item.name }}
             </h2>
