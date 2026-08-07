@@ -34,7 +34,7 @@
     "@nuxtjs/i18n": "^10.4.0",
     "date-fns": "^4.4.0",
     "iso8601-duration": "^2.1.4",
-    "nuxt": "^4.4.8"
+    "nuxt": "^4.5.1"
   },
   "devDependencies": {
     "@csstools/postcss-global-data": "^4.0.0",
