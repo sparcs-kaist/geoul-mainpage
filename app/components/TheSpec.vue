@@ -70,10 +70,10 @@
         data() {
             return {
                 items: [
-                    { category: 'spec-cpu', value: 'Xeon E5-2620' },
-                    { category: 'spec-ram', value: '64 GiB' },
-                    { category: 'spec-stor', value: '72TiB RAID-6' },
-                    { category: 'spec-net', value: '2 x 10Gbps' },
+                    { category: 'spec-cpu', value: 'Xeon E5-2697 v4' },
+                    { category: 'spec-ram', value: '128 GiB' },
+                    { category: 'spec-stor', value: '96TB RAIDZ2' },
+                    { category: 'spec-net', value: '2 x 100Gbps' },
                     { category: 'spec-loc', value: 'Daejeon, South Korea' }
                 ]
             };
