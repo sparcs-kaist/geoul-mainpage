@@ -3,7 +3,6 @@
         <TheTopbar />
         <main class="Index__main">
             <div class="Index__column">
-                <TheOptOut />
                 <TheDescriptions />
                 <ThePackages :package-names="packageNames" />
             </div>
@@ -96,7 +95,6 @@
     import TheFooter from "@/components/TheFooter";
     import TheLinks from "@/components/TheLinks";
     import TheNotifications from "@/components/TheNotifications";
-    import TheOptOut from "@/components/TheOptOut";
     import ThePackages from "@/components/ThePackages";
     import TheSpec from "@/components/TheSpec";
     import TheSpeedTest from "@/components/TheSpeedTest";
@@ -133,7 +131,6 @@
             TheFooter,
             TheLinks,
             TheNotifications,
-            TheOptOut,
             ThePackages,
             TheSpec,
             TheSpeedTest,
